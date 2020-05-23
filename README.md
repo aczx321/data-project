@@ -1,4 +1,4 @@
-## A Journalists' Guide for Mining and Analyzing Tweets with R
+## A Journalists' Guide: Mining and Analyzing Tweets with R
 
 You can use the [editor on GitHub](https://github.com/aczx321/data-project/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
