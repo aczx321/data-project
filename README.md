@@ -86,6 +86,26 @@ ggplot(tw.dfs) + geom_point(aes(x=created,y=replyToSN))
 
 <img src="photo/pre-reply-stat.png" alt="hi" class="inline"/>
 
+The long line at the top are tweets that contain no replyToSN value, so it appears as NA (Not Available). We can go a little further and plot the display of when Governor Cuomo replied, retweeted and/or neither. We will assign black dots to represent replies, red for retweets and blue to show tweets that are not replies or retweets. 
+
+```markdown
+# add color distributions and titles to the plot
+ggplot(ac_df)+geom_point(aes(x=created,y=replyToSN), col="blue", size=1)
+# add colors
+ggplot()+
+  geom_point(data=subset(
+    ac_df,subset=(!is.na(replyToSN))),
+    aes(x=created,y=replyToSN),col="black") + 
+  geom_point(data=subset(
+    ac_df,subset=(!is.na(replyToSN))),
+    aes(x=created,y=rt),col="red")+
+  geom_point(data=subset(ac_df,subset=(is.na(replyToSN) & is.na(rt))),
+             aes(x=created,y=screenName),col="blue")+
+  labs(title = "Cuomo's Reply Tweet Stats",
+       subtitle = "Twitter accounts he replies to from April 28 to May 22",
+       caption = "Source: data collected from Twitter's REST API via twitteR")
+```
+<img src="photo/reply-stats.png" alt="hi" class="inline"/>
 
 ```markdown
 Syntax highlighted code block
