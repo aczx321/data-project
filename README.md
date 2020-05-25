@@ -26,13 +26,13 @@ You can also follow this 2-minute video showing [how to quickly setup your accou
 R Script is your playing field. We will use the package ‘twitteR’ to extract the tweets. Note that if you are not working on RStudio Cloud, you will have to ‘install.packages()’ before running ‘library()’.
 
 ```markdown
-library (twitteR)
+`library (twitteR)`
 # Then create Twitter connection
 # fill in the info from the app
-api_key <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+`api_key <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
 api_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
 access_token <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
-access_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+access_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
 # create twitter connection
 setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 ```
@@ -196,19 +196,19 @@ text_df <- read.csv("tweets.csv", stringsAsFactors = FALSE)
 
 library(syuzhet)
 # convert text into vector
-vector <- as.character(text_df$text)
+`vector <- as.character(text_df$text)`
 # obtain sentiment scores
 # 1st observe the score attribution
-get_nrc_sentiment("happy")
-get_nrc_sentiment("bad")
+`get_nrc_sentiment("happy")`
+`get_nrc_sentiment("bad")`
 # now store the dataset in a
-a <- get_nrc_sentiment(vector)
+`a <- get_nrc_sentiment(vector)`
 # combine the text column with sentiment columns
-sentiment <- cbind(text_df$text, a)
+`sentiment <- cbind(text_df$text, a)`
 
-library(RColorBrewer)
+`library(RColorBrewer)`
 # plot
-barplot(sort(colSums(a), decreasing = TRUE),
+`barplot(sort(colSums(a), decreasing = TRUE),
         las = 1,
         cex.axis = 1,
         col = c("blue"),
@@ -217,7 +217,7 @@ barplot(sort(colSums(a), decreasing = TRUE),
         font.axis=1,
         main = "Sentiment Scores for Cuomo's Tweets", 
         sub = "Source: data collected from Twitter's REST API via twitteR",
-        cex.sub = .7)
+        cex.sub = .7)`
 ```
 
 <img src="photo/sentiment-score.png" alt="hi" class="inline"/>
