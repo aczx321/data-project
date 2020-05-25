@@ -1,4 +1,4 @@
-## A journalists’ basic guide to scrape and analyze a Twitter account with R
+## A journalist basic guide to scrape and analyze a Twitter account with R
 
 Before we start, if it makes you feel better, I’m a low-tech millennial. 
 As journalists, we seek to publish stories that are newsworthy and have potential. With high demand in daily news output, we turn to social media for breaking news, original stories and trends. And there’s no doubt that social media plays a prominent role in our society today. A survey conducted in 2019 by Ofcom on news consumption among adults and older children in the UK found that 49 percent of over 4,000 participants use social media to consume news. Meanwhile, across the pond, 55 percent of American adults often get their news from social media, according to the 2019 report by Pew Research Center.
@@ -14,6 +14,10 @@ This step-by-step guide covers the basics of Twitter scraping and data plotting 
 Before scraping data from Twitter, we will need access codes. You have to create a new Twitter application which will allow you to connect to the API. You need to have a Twitter account to do this. First, apply for a developer account [here](https://developer.twitter.com/en/apply-for-access.html). Once you’re approved by Twitter you can then create a new application. You will then receive the credentials which are only for you to use.
 Here’s a 2-minute video showing [how to create a Twitter application](https://www.youtube.com/watch?v=LpLYQz_3hA0&t=2s).
 
+
+
+
+<img src="photo/cuomo.png" alt="hi" class="inline"/>
 
 ```markdown
 Syntax highlighted code block
