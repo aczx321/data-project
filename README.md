@@ -28,10 +28,10 @@ R Script is your playing field. We will use the package ‘twitteR’ to extract
 library (twitteR)
 # Then create Twitter connection
 # fill in the info from the app
-api_key <- "6uHzxAc8qoTe6AwVomHLTc1uN"
-api_secret <- "OkxnR7hqiUqkGU5M3qZEogVEfmXzwUfeWdClUyDLwbsdTbaqo2"
-access_token <- "704811365962289152-rV1qGq3wxStFCTrzFChnw996w2ZjLmz"
-access_secret <- "0FZiiB4ZiUQCyknWYQBI6ab5HzXzsnMSaq3T4tCe1Jbm2"
+api_key <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+api_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+access_token <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+access_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
 # create twitter connection
 setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 ```
