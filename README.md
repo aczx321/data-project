@@ -107,6 +107,50 @@ ggplot()+
 ```
 <img src="photo/reply-stats.png" alt="hi" class="inline"/>
 
+The graph shows Governor Cuomo mostly replying to himself and to only a handful of people. The bold blue-dot line demonstrates that he has repeated interactions with his own tweets. We can double check the number of replies by pulling ‘head()’
+
+```markdown
+head(table(ac_df$replyToSN))
+NYGovCuomo     CSiriano    NursMama2   NewYorkStateAG   Edu_Historian   OregonGovBrown          
+      88             1            1               1                1                1
+```
+
+Given each of the users receive the same amount of one reply or a black dot in the previous graph, we don’t need to plot a chart to display who got the most responses. So, we can move on to analyze his Twitter usage timeline.
+
+Now we will plot a jitter or scatter chart and count the number of Governor Cuomo’s tweets by day of the week vs. hour.
+
+```markdown
+# label the tweets with the month number
+ac_df$month = sapply(ac_df$created, function(x) {p=as.POSIXlt(x);p$mon})
+#label the tweets with the hour
+ac_df$hour=sapply(ac_df$created, function(x) {p=as.POSIXlt(x);p$hour})
+# label the tweets with a number corresponding to the day of the week
+ac_df$wday=sapply(ac_df$created, function(x) {p=as.POSIXlt(x);p$wday})
+
+# plotting
+ggplot(ac_df,aes(x=wday,y=hour)) + 
+  geom_jitter(position=position_jitter(width=.27, height=), col="blue") +
+  labs(title = "Cuomo's Tweet Activity by Hour vs. Day in the Week",
+       subtitle = "During the period of April 28 to May 22: where 0 is Sunday",
+       caption = "Source: data collected from Twitter's REST API via twitteR")
+```
+
+<img src="photo/tweets-week.png" alt="hi" class="inline"/>
+
+Each dot in this scatter plot represents a tweet. The positions of the dots are only the approximate time each individual tweet was sent in a day of the week. Note that the ‘wday’ function ranks the day of the week starting with Sunday as 0 and so on.
+
+To have a clearer picture, we can use a bar chart to compare what times of day or days of week the New York Governor is tweeting.
+
+
+
+
+
+
+
+
+
+
+
 ```markdown
 Syntax highlighted code block
 
