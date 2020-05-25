@@ -18,7 +18,7 @@ Here’s a 2-minute video showing [how to create a Twitter application](https://
 
 #### Step 2: Set up your [RStudio Cloud](https://rstudio.cloud) account and create a new R script
 Here’s a 2-minute video showing [how to quickly setup your account](https://www.youtube.com/watch?v=U-pLWJO6-P4)
-
+<img src="photo/new-R-script.png" alt="hi" class="inline"/>
 
 
 <img src="photo/cuomo.png" alt="hi" class="inline"/>
