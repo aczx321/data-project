@@ -29,12 +29,12 @@ R Script is your playing field. We will use the package ‘twitteR’ to extract
 `library (twitteR)`
 # Then create Twitter connection
 # fill in the info from the app
-`api_key <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
-api_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
-access_token <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
-access_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
+`api_key <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
+`api_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
+`access_token <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
+`access_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
 # create twitter connection
-setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
+`setup_twitter_oauth(api_key, api_secret, access_token, access_secret)`
 ```
 Now time to choose a Twitter account to analyze. In this example, we will look at [@NYGovCuomo](https://twitter.com/NYGovCuomo), the account of Andrew M. Cuomo, governor of New York.
 
@@ -42,13 +42,13 @@ Now time to choose a Twitter account to analyze. In this example, we will look a
 
 ```markdown
 # pick a user to analyze
-username='NYGovCuomo'
+`username='NYGovCuomo'`
 # we will be using the maximum number of 3200 tweets that Twitter allows viewing
-cuomo=userTimeline(username,n=3200)
+`cuomo=userTimeline(username,n=3200)`
 # convert tweets into dataframe
-ac_df=twListToDF(cuomo)
+`ac_df=twListToDF(cuomo)`
 # we can save the dataframe for later use 
-write.csv(dataframe,"tweets.csv", row.names = FALSE)
+`write.csv(dataframe,"tweets.csv", row.names = FALSE)`
 ```
 
 ### Step 4: Plotting
@@ -56,11 +56,11 @@ For the first plot, we will look at a timeline with the name of each account Cuo
 
 ```markdown
 # Import the ‘stringr’ package to remove names with old-school retweet text or ‘RT’
-library(stringr)
-trim <- function (x) sub('@','',x)
+`library(stringr)`
+`trim <- function (x) sub('@','',x)`
 # The rt column shows who was retweeted & the rtt shows whether or not it was a retweet
-ac_df$rt=sapply(ac_df$text,function(tweet) trim(str_match(tweet,"^RT (@[[:alnum:]_]*)")[2]))
-ac_df$rtt=sapply(ac_df$rt,function(rt) if (is.na(rt)) 'T' else 'RT')
+`ac_df$rt=sapply(ac_df$text,function(tweet) trim(str_match(tweet,"^RT (@[[:alnum:]_]*)")[2]))`
+`ac_df$rtt=sapply(ac_df$rt,function(rt) if (is.na(rt)) 'T' else 'RT')`
 ```
 
 Once we Run the lines above, we will get a dataset that includes the column called ‘created’ containing specific time each tweet was created in the form of ‘year-mm-dd hh-mm-ss,’ for instance ‘2020-05-05 17:27:40’ and the overall tweets contributors. We will arrange the usernames according to its chronological timeline in the display.
