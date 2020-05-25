@@ -62,6 +62,29 @@ ac_df$rt=sapply(ac_df$text,function(tweet) trim(str_match(tweet,"^RT (@[[:alnum:
 ac_df$rtt=sapply(ac_df$rt,function(rt) if (is.na(rt)) 'T' else 'RT')
 ```
 
+Once we Run the lines above, we will get a dataset that includes the column called ‘created’ containing specific time each tweet was created in the form of ‘year-mm-dd hh-mm-ss,’ for instance ‘2020-05-05 17:27:40’ and the overall tweets contributors. We will arrange the usernames according to its chronological timeline in the display.
+
+```markdown
+# We will need to import the ‘plyr’ package to split the data apart.
+library(plyr)
+# order the replyToSN in the order that they were tweeted
+ac_dfx=ddply(ac_df, 
+             .var = "replyToSN", 
+             .fun = function(x) 
+             {return(subset(x, 
+                            created %in% min(created),
+                            select=c(replyToSN,created)))
+             }
+)
+ac_dfxa=arrange(ac_dfx,-desc(created))
+ac_df$replyToSN=factor(ac_df$replyToSN, levels = ac_dfxa$replyToSN)
+
+# import the ‘ggplot2’ package to plot the result
+library(ggplot2)
+ggplot(tw.dfs) + geom_point(aes(x=created,y=replyToSN))
+```
+
+<img src="photo/pre-reply-stat.png" alt="hi" class="inline"/>
 
 
 ```markdown
