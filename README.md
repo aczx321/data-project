@@ -1,6 +1,6 @@
 ## A journalist's basic guide to scrape and analyze a Twitter account with R
 
-Before we start, if it makes you feel better, I’m a low-tech millennial. 
+Before we start, if it makes you feel better, I’m a low-tech millennial.
 
 As journalists, we seek to publish stories that are newsworthy and have potential. With high demand in daily news output, we turn to social media for breaking news, original stories and trends. And there’s no doubt that social media plays a prominent role in our society today. A survey conducted in 2019 by Ofcom on news consumption among adults and older children in the UK found that 49 percent of over 4,000 participants use social media to consume news. Meanwhile, across the pond, 55 percent of American adults often get their news from social media, according to the 2019 report by Pew Research Center.
 
