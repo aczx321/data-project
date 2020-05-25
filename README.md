@@ -141,8 +141,166 @@ Each dot in this scatter plot represents a tweet. The positions of the dots are 
 
 To have a clearer picture, we can use a bar chart to compare what times of day or days of week the New York Governor is tweeting.
 
+```markdown
+#plot the number of tweets within particular day of the week
+ggplot(ac_df,aes(x=wday))+geom_histogram(aes(y = (..count..)), fill="blue", binwidth=.5)+
+  labs(title = "Cuomo's Number of Tweets in A Day of the Week",
+       subtitle = "During the period of April 28 to May 22: where 0 is Sunday",
+       caption = "Source: data collected from Twitter's REST API via twitteR")
+```
 
+<img src="photo/tweets-hour.png" alt="hi" class="inline"/>
 
+```markdown
+#plot the number of tweets within particular hour of the day
+ggplot(ac_df,aes(x=hour))+geom_histogram(aes(y = (..count..)), fill="blue", binwidth=1)+
+  labs(title = "Cuomo's Average Number of Tweets by Hour",
+       subtitle = "During the period of April 28 to May 22",
+       caption = "Source: data collected from Twitter's REST API via twitteR")
+```
+
+<img src="photo/tweets-day.png" alt="hi" class="inline"/>
+
+Finally, we can make a time series graph to show Governor Cuomo’s tweeting trend over time. The time series is a line graph with two elements including a timestamp and keep count. We can generate a time series around a user timeline by using a unit value of 1 to link it with each timestamp.
+
+```markdown
+# use the xts function to create a timeline
+install.packages("xts")
+library(xts)
+timeseries=xts(rep(1,times=nrow(ac_df)),ac_df$created)
+
+# sum the unit values to get the number of tweets per day
+timeseries=apply.daily(ts,sum) 
+#also apply. weekly, monthly, quarterly, yearly
+
+#If for any resason we need to turn the timeseries into a dataframe, we can:
+timeseries_sum =data.frame(date=index(timeseries), coredata(timeseries))
+colnames(timeseries_sum)=c('date','sum')
+
+# plot the timeseries
+ggplot(timeseries_sum)+geom_line(aes(x=date,y=sum), col="blue")+
+  labs(title = "Cuomo's Count of Tweets",
+       subtitle = "During the period of April 28 to May 22",
+       caption = "Source: data collected from Twitter's REST API via twitteR")
+```
+
+<img src="photo/timeseries.png" alt="hi" class="inline"/>
+
+Note that this method pulls the most recent tweets from Twitter, so if you revisit and Run the R Script on a different day, the results may vary. This is why we save the data as a csv at the end of Step3. With the same dataset, we can analyze the sentiment in a bar plot as well as make a word cloud.
+
+```markdown
+# read file
+library(readr)
+text_df <- read.csv("tweets.csv", stringsAsFactors = FALSE)
+
+library(syuzhet)
+# convert text into vector
+vector <- as.character(text_df$text)
+# obtain sentiment scores
+# 1st observe the score attribution
+get_nrc_sentiment("happy")
+get_nrc_sentiment("bad")
+# now store the dataset in a
+a <- get_nrc_sentiment(vector)
+# combine the text column with sentiment columns
+sentiment <- cbind(text_df$text, a)
+
+library(RColorBrewer)
+# plot
+barplot(sort(colSums(a), decreasing = TRUE),
+        las = 1,
+        cex.axis = 1,
+        col = c("blue"),
+        ylab = "Count", xlab = "Sentiment",
+        ylim = c(0,600),
+        font.axis=1,
+        main = "Sentiment Scores for Cuomo's Tweets", 
+        sub = "Source: data collected from Twitter's REST API via twitteR",
+        cex.sub = .7)
+```
+
+<img src="photo/sentiment-score.png" alt="hi" class="inline"/>
+
+In this bar graph, we look at the overall distribution of sentiment among words tweeted by Governor Cuomo. We can see that the positive sentiment score receives the highest distribution.
+
+```markdown
+#Read file
+library(readr)
+tweets <- read_csv("tweets.csv")
+View(tweets)
+
+# build corpus
+library(tm)
+corpus <- iconv(tweets$text, to = "utf-8")
+str(tweets)
+
+# store corpus
+corpus <- Corpus(VectorSource(corpus))
+
+###clean the data###
+inspect(corpus [1:10])
+space <- content_transformer(function (x , pattern ) gsub(pattern, "", x))
+corpus <- tm_map(corpus, space, "/")
+corpus <- tm_map(corpus, space, "@")
+corpus <- tm_map(corpus, space, "\\|")
+corpus <- tm_map(corpus, space, "\n")
+
+# remove URl
+removeURL <- function(x) gsub("http[[:alnum:][:punct:]]*", "", x) 
+removeURL_2 <- function(x) gsub("http[^[:space:]]*", "", x)
+corpus <- tm_map(corpus, content_transformer(removeURL))
+corpus <- tm_map(corpus, content_transformer(removeURL_2))
+
+# change all text to lower case
+corpus <- tm_map(corpus, tolower)
+
+library(textclean)
+# remove curly quotes ” and ’
+corpus <- tm_map(corpus, replace_curly_quote)
+# replace "it's" to "it is"
+corpus <- tm_map(corpus, replace_contraction)
+# remove numbers
+corpus <- tm_map(corpus, removeNumbers)
+# remove punctuations
+corpus <- tm_map(corpus, removePunctuation)
+# remove some words that doesn't add value
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+# remove additional words
+myStopwords <- c("new","watch", "live","will","get","got", "just", "this", "the", "also", "will", "can", "may", "must")
+corpus <- tm_map(corpus, removeWords, c(myStopwords, "s…"))
+# match words
+corpus <- tm_map(corpus, gsub, pattern = "york", replacement = "newyork")
+corpus <- tm_map(corpus, gsub, pattern = "life", replacement = "lives")
+corpus <- tm_map(corpus, gsub, pattern = "covid", replacement = "coronavirus")
+corpus <- tm_map(corpus, gsub, pattern = "newnew", replacement = "new")
+# remove blank spaces
+corpus <- tm_map(corpus, stripWhitespace)
+inspect(corpus[1:10])
+
+# convert tweets into structure data via term document matrix
+tdm <-TermDocumentMatrix(corpus)
+# see it in matrix
+a <- as.matrix(tdm)
+b <- sort(rowSums(a), decreasing = TRUE)
+c <- data.frame(word = names(b), freq=b)
+# look at the dataset
+head(c, 10)
+
+# word cloud
+library(wordcloud)
+wordcloud(words = c$word, 
+          freq = c$freq, 
+          scale=c(3,0.5), 
+          min.freq=5, 
+          max.words=90,
+          random.order=FALSE,
+          rot.per=0.3, colors = "blue")
+
+```
+
+<img src="photo/wordcloud.png" alt="hi" class="inline"/>
+
+In this visualization, I set the words maximum at 90 plus each word must have been used over 5 times. The size of the word equals how frequent it was mentioned.
 
 
 
@@ -175,6 +333,3 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
 
 Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/aczx321/data-project/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
