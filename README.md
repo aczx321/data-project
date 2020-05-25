@@ -26,7 +26,7 @@ R Script is your playing field. We will use the package ‘twitteR’ to extract
 
 ```markdown
 library (twitteR)
-#Then create Twitter connection
+# Then create Twitter connection
 # fill in the info from the app
 api_key <- "6uHzxAc8qoTe6AwVomHLTc1uN"
 api_secret <- "OkxnR7hqiUqkGU5M3qZEogVEfmXzwUfeWdClUyDLwbsdTbaqo2"
@@ -35,9 +35,34 @@ access_secret <- "0FZiiB4ZiUQCyknWYQBI6ab5HzXzsnMSaq3T4tCe1Jbm2"
 # create twitter connection
 setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 ```
-
+Now time to choose a Twitter account to analyze. In this example, we will look at [@NYGovCuomo](https://twitter.com/NYGovCuomo), the account of Andrew M. Cuomo, governor of New York.
 
 <img src="photo/cuomo.png" alt="hi" class="inline"/>
+
+```markdown
+# pick a user to analyze
+username='NYGovCuomo'
+# we will be using the maximum number of 3200 tweets that Twitter allows viewing
+cuomo=userTimeline(username,n=3200)
+# convert tweets into dataframe
+ac_df=twListToDF(cuomo)
+# we can save the dataframe for later use 
+write.csv(dataframe,"tweets.csv", row.names = FALSE)
+```
+
+### Step 4: Plotting
+For the first plot, we will look at a timeline with the name of each account Cuomo replies to:
+
+```markdown
+# Import the ‘stringr’ package to remove names with old-school retweet text or ‘RT’
+library(stringr)
+trim <- function (x) sub('@','',x)
+# The rt column shows who was retweeted & the rtt shows whether or not it was a retweet
+ac_df$rt=sapply(ac_df$text,function(tweet) trim(str_match(tweet,"^RT (@[[:alnum:]_]*)")[2]))
+ac_df$rtt=sapply(ac_df$rt,function(rt) if (is.na(rt)) 'T' else 'RT')
+```
+
+
 
 ```markdown
 Syntax highlighted code block
