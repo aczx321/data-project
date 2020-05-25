@@ -15,7 +15,7 @@ This step-by-step guide covers the basics of Twitter scraping and data plotting 
 Before scraping data from Twitter, we will need access codes. You will have to create a new Twitter application which will allow you to connect to the API. You need to have a Twitter account to do this. First, apply for a developer account [here](https://developer.twitter.com/en/apply-for-access.html). Once you’re approved by Twitter you can then create a new application. You will then receive the credentials which are only for you to use.
 Here’s a 2-minute video showing [how to create a Twitter application](https://www.youtube.com/watch?v=LpLYQz_3hA0&t=2s)
 
-<img src="photo/Access-key.png" alt="hi" class="inline"/>
+<img src="photo/Access-key.png" alt="hi" class="inline"/ width="400" height="600">
 
 
 ### Step 2: Set up your RStudio Cloud account 
@@ -41,7 +41,7 @@ setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 ```
 Now time to choose a Twitter account to analyze. In this example, we will look at [@NYGovCuomo](https://twitter.com/NYGovCuomo), the account of Andrew M. Cuomo, governor of New York.
 
-<img src="photo/cuomo.png" alt="hi" class="inline"/ width ="400" height ="600">
+<img src="photo/cuomo.png" alt="hi" class="inline"/>
 
 ```markdown
 # pick a user to analyze
