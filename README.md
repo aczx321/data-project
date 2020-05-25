@@ -41,7 +41,7 @@ setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 ```
 Now time to choose a Twitter account to analyze. In this example, we will look at [@NYGovCuomo](https://twitter.com/NYGovCuomo), the account of Andrew M. Cuomo, governor of New York.
 
-<img src="photo/cuomo.png" alt="hi" class="inline"/>
+<img src="photo/cuomo.png" alt="hi" class="inline"/ width ="400" height ="600">
 
 ```markdown
 # pick a user to analyze
