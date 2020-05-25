@@ -26,15 +26,15 @@ You can also follow this 2-minute video showing [how to quickly setup your accou
 R Script is your playing field. We will use the package ‘twitteR’ to extract the tweets. Note that if you are not working on RStudio Cloud, you will have to ‘install.packages()’ before running ‘library()’.
 
 ```markdown
-`library (twitteR)`
+`library (twitteR)
 # Then create Twitter connection
 # fill in the info from the app
-`api_key <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
-`api_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
-`access_token <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
-`access_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"`
+api_key <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+api_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+access_token <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
+access_secret <- "xxxxxxxxxsxexcxrxextxxxxxxxxxxxx"
 # create twitter connection
-`setup_twitter_oauth(api_key, api_secret, access_token, access_secret)`
+setup_twitter_oauth(api_key, api_secret, access_token, access_secret)`
 ```
 Now time to choose a Twitter account to analyze. In this example, we will look at [@NYGovCuomo](https://twitter.com/NYGovCuomo), the account of Andrew M. Cuomo, governor of New York.
 
