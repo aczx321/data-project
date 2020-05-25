@@ -10,17 +10,20 @@ The flood of information on Twitter or other social media could drown or sweep j
 
 This step-by-step guide covers the basics of Twitter scraping and data plotting with RStudio Cloud. Let’s get started:
 
+
 ### Step 1: Getting Twitter API access
 Before scraping data from Twitter, we will need access codes. You will have to create a new Twitter application which will allow you to connect to the API. You need to have a Twitter account to do this. First, apply for a developer account [here](https://developer.twitter.com/en/apply-for-access.html). Once you’re approved by Twitter you can then create a new application. You will then receive the credentials which are only for you to use.
 Here’s a 2-minute video showing [how to create a Twitter application](https://www.youtube.com/watch?v=LpLYQz_3hA0&t=2s)
 
 <img src="photo/Access-key.png" alt="hi" class="inline"/>
 
+
 ### Step 2: Set up your RStudio Cloud account 
 Sign up for [RStudio Cloud](https://rstudio.cloud) account, create a new Project and then create a new R script.
 You can also follow this 2-minute video showing [how to quickly setup your account](https://www.youtube.com/watch?v=U-pLWJO6-P4)
 
 <img src="photo/new-R-script.png" alt="hi" class="inline"/>
+
 
 ### Step 3: Scraping Tweets
 R Script is your playing field. We will use the package ‘twitteR’ to extract the tweets. Note that if you are not working on RStudio Cloud, you will have to ‘install.packages()’ before running ‘library()’.
