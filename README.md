@@ -190,7 +190,7 @@ ggplot(timeseries_sum)+geom_line(aes(x=date,y=sum), col="blue")+
 
 <img src="photo/timeseries.png" alt="hi" class="inline"/>
 
-Note that this method pulls the most recent tweets from Twitter, so if you revisit and Run the R Script on a different day, the results may vary. This is why we save the data as a csv at the end of Step3. With the same dataset, we can analyze the sentiment in a bar plot as well as make a word cloud.
+Note that this method pulls the most recent tweets from Twitter, so if you revisit and Run the R Script on a different day, the results may vary. This is why we save the data as a csv at the end of **Step 4**. With the same dataset, we can analyze the sentiment in a bar plot as well as make a word cloud.
 
 ```markdown
 # read file
